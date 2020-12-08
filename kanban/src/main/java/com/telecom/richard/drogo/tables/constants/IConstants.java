@@ -9,5 +9,9 @@ public interface IConstants {
 	public int P5 = 32;
 	public int P6 = 64;
 	public int P7 = 128;
+	public int P8 = 256;
+	public int P9 = 512;
+	public int P10 = 1024;
+	public int P11 = 2048;
 	// END: ATTRIBUTES
 }
