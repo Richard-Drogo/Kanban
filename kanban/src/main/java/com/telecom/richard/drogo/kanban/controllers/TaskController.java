@@ -3,11 +3,13 @@ package com.telecom.richard.drogo.kanban.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telecom.richard.drogo.kanban.domain.Task;
@@ -15,6 +17,7 @@ import com.telecom.richard.drogo.kanban.domain.TaskStatus;
 import com.telecom.richard.drogo.kanban.service.TaskService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.PATCH})
 public class TaskController {
 
 	@Autowired

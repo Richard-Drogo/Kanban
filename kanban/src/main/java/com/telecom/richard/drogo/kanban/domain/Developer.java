@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@JsonIgnoreProperties({"tasks"})
+@JsonIgnoreProperties({"tasks", "password"})
 @Entity
 public class Developer {
 	// BEGIN: ATTRIBUTES
