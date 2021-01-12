@@ -14,7 +14,7 @@ import com.telecom.richard.drogo.kanban.domain.Developer;
 import com.telecom.richard.drogo.kanban.domain.Task;
 import com.telecom.richard.drogo.kanban.domain.TaskStatus;
 import com.telecom.richard.drogo.kanban.domain.TaskType;
-import com.telecom.richard.drogo.tables.service.DeveloperService;
+import com.telecom.richard.drogo.kanban.service.DeveloperService;
 
 @Component
 public class StartUpRunner implements CommandLineRunner {

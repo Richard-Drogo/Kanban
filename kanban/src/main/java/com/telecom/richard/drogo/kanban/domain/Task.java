@@ -2,7 +2,6 @@ package com.telecom.richard.drogo.kanban.domain;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,14 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.telecom.richard.drogo.tables.constants.DeveloperConstants;
 import com.telecom.richard.drogo.tables.constants.TaskConstants;
 
 import lombok.Data;
@@ -28,6 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
+@JsonIgnoreProperties({"developers"})
 @Entity
 public class Task {
 	// BEGIN: ATTRIBUTES
@@ -64,7 +62,6 @@ public class Task {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JsonIgnoreProperties("tasks")
 	private Set<Developer> developers;
 	// END: ATTRIBUTES
 	
@@ -82,8 +79,6 @@ public class Task {
 		}
 	}
 	
-	public Task() {} // Needed for Tests.
-	
 	public void addDeveloper(Developer developer) {
 		developer.getTasks().add(this);
 		developers.add(developer);
@@ -92,4 +87,6 @@ public class Task {
 	public void changeStatus(TaskStatus newStatus) {
 		this.status = newStatus;
 	}
+	
+	public Task() {} // Needed for Tests.
 }

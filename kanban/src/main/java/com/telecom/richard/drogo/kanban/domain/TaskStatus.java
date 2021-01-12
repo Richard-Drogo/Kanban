@@ -1,27 +1,41 @@
 package com.telecom.richard.drogo.kanban.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.telecom.richard.drogo.tables.constants.TaskConstants;
 import com.telecom.richard.drogo.tables.constants.TaskStatusConstants;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
+@JsonIgnoreProperties({"tasks"})
 @Entity
 public class TaskStatus {
 	// BEGIN: ATTRIBUTES
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable=false, length=TaskStatusConstants.COLUMN_LENGTH_LABEL)
 	private String label;
-	// END: ATTRIBUTES
 	
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToMany(mappedBy="status", fetch=FetchType.EAGER)
+	private List<Task> tasks;
+	// END: ATTRIBUTES
+
 	public TaskStatus(Long id_, String label_) {
 		id = id_;
 		label = label_;

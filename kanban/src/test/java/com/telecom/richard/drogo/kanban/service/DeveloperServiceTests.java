@@ -1,4 +1,4 @@
-package com.telecom.richard.drogo.kanban;
+package com.telecom.richard.drogo.kanban.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.telecom.richard.drogo.kanban.DatabaseInitializer;
 import com.telecom.richard.drogo.kanban.domain.Developer;
-import com.telecom.richard.drogo.tables.service.DeveloperService;
+import com.telecom.richard.drogo.kanban.service.DeveloperService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

@@ -1,4 +1,4 @@
-package com.telecom.richard.drogo.kanban;
+package com.telecom.richard.drogo.kanban.service;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.telecom.richard.drogo.kanban.DatabaseInitializer;
+import com.telecom.richard.drogo.kanban.dao.TaskRepository;
 import com.telecom.richard.drogo.kanban.dao.TaskStatusRepository;
+import com.telecom.richard.drogo.kanban.dao.TaskTypeRepository;
 import com.telecom.richard.drogo.kanban.domain.Task;
 import com.telecom.richard.drogo.kanban.domain.TaskStatus;
-import com.telecom.richard.drogo.tables.service.TaskService;
+import com.telecom.richard.drogo.kanban.service.TaskService;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -26,16 +29,22 @@ class TaskServiceTests {
 	
 	@Test
 	void findAllTasksTest() {
-		Task[] actual = new Task[taskService.findAllTasks().size()];
-		assertArrayEquals(DatabaseInitializer.getInitialTasks(), taskService.findAllTasks().toArray(actual));
+		Task[] initial_tasks = DatabaseInitializer.getInitialTasks();
+		Task[] asked_tasks = new Task[DatabaseInitializer.getInitialTasks().length];
+		taskService.findAllTasks().toArray(asked_tasks);
+		
+		assertArrayEquals(initial_tasks, asked_tasks);
 	}
 
 	@Test
 	void findTaskTest() {
-		Task asked_task = DatabaseInitializer.getInitialTasks()[0];
-		assertEquals(asked_task, taskService.findTask(asked_task.getId()));
+		Task[] initial_tasks = DatabaseInitializer.getInitialTasks();
+		Task asked_task = taskService.findTaskById(initial_tasks[0].getId());
+		
+		assertEquals(initial_tasks[0], asked_task);
 	}
-	
+
+	// Needs findTaskTest OK to be tested
 	@Test
 	void moveRightTaskTest() {
 		Task taskToBeMovedToRight = DatabaseInitializer.getInitialTasks()[0];
@@ -44,13 +53,14 @@ class TaskServiceTests {
 		taskService.moveRightTask(taskToBeMovedToRight);
 		
 		boolean state = false;
-		if(taskToBeMovedToRight.getStatus() == nextTaskStatus) {
+		if(taskToBeMovedToRight.getStatus().equals(nextTaskStatus)) {
 			state = true;			
 		}
 		
 		assertTrue(state);
 	}
 	
+	// Needs moveRightTaskTest OK to be tested
 	@Test
 	void moveLeftTaskTest() {
 		Task taskToBeMovedToLeft = DatabaseInitializer.getInitialTasks()[0];
@@ -60,7 +70,7 @@ class TaskServiceTests {
 		taskService.moveLeftTask(taskToBeMovedToLeft);
 		
 		boolean state = false;
-		if(taskToBeMovedToLeft.getStatus() == previousTaskStatus) {
+		if(taskToBeMovedToLeft.getStatus().equals(previousTaskStatus)) {
 			state = true;			
 		}
 		

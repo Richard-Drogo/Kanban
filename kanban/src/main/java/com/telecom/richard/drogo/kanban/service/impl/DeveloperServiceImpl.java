@@ -1,4 +1,4 @@
-package com.telecom.richard.drogo.tables.service.impl;
+package com.telecom.richard.drogo.kanban.service.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.telecom.richard.drogo.kanban.dao.DeveloperRepository;
 import com.telecom.richard.drogo.kanban.domain.Developer;
-import com.telecom.richard.drogo.tables.service.DeveloperService;
+import com.telecom.richard.drogo.kanban.service.DeveloperService;
 
 @Service
 public class DeveloperServiceImpl implements DeveloperService {

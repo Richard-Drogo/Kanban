@@ -25,6 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
+@JsonIgnoreProperties({"tasks"})
 @Entity
 public class Developer {
 	// BEGIN: ATTRIBUTES
@@ -56,7 +57,6 @@ public class Developer {
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@ManyToMany(mappedBy="developers", fetch=FetchType.EAGER)
-	@JsonIgnoreProperties("developers")
 	private Set<Task> tasks;
 	// END: ATTRIBUTES
 	
